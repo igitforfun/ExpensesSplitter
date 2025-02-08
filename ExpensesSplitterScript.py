@@ -17,9 +17,9 @@ def show_explist():
         print(f"{i+1}. {formatted_expenselist[i]}")
     print("========================Summary===========================")
     for j in range(len(namelist)):
-        if int(moneylist[j]) < 0:
+        if float(moneylist[j]) < 0:
             print(f"{namelist[j]} owes {moneylist[j]}")
-        elif int(moneylist[j]) > 0:
+        elif float(moneylist[j]) > 0:
             print(f"{namelist[j]} needs to get back {moneylist[j]} ")
         else:
             print(f"{namelist[j]} don't owe or receive")
@@ -35,7 +35,7 @@ def remove_expenses():
     else:
         sel_index = sel - 1
         payer = str(formatted_expenselist[sel_index].split('paid by ')[-1])
-        amt = int((formatted_expenselist[sel_index].split('paid by ')[0]).split('$')[-1])
+        amt = float((formatted_expenselist[sel_index].split('paid by ')[0]).split('$')[-1])
         for j in range(len(namelist)):
             if namelist[j] == payer:
                 moneylist[j] -= amt * (len(namelist)-1)/(len(namelist))
@@ -48,7 +48,7 @@ def add_expenses():
     not_found = True
     exp_name = str(input("Name of expenses?\n"))
     payer = str(input(f"Who paid?\n {namelist}\n"))
-    amt = int(input(f"How much?\n"))
+    amt = float(input(f"How much?\n"))
     for j in range(len(namelist)):                                              #loop through each names and calculate owe/gain
         if namelist[j] == payer:
             not_found = False
